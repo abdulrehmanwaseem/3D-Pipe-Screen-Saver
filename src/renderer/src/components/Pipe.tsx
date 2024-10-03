@@ -11,7 +11,7 @@ interface PipeSegment {
 type DirectionArray = THREE.Vector3[]
 type Vector3 = THREE.Vector3
 
-function Pipe() {
+function Pipe({ color = '#0077ff' }) {
   const pipeRef = useRef<THREE.Group>(null)
   const [pipes, setPipes] = useState<PipeSegment[]>([])
   const [currentPosition, setCurrentPosition] = useState<Vector3>(new THREE.Vector3(0, 0, 0))
@@ -19,15 +19,16 @@ function Pipe() {
 
   useFrame(() => {
     const directions: DirectionArray = [
-      new THREE.Vector3(20, 0, 0),
-      new THREE.Vector3(-20, 0, 0),
-      new THREE.Vector3(0, 20, 0),
-      new THREE.Vector3(0, -20, 0),
-      new THREE.Vector3(0, 0, 20),
-      new THREE.Vector3(0, 0, -20)
+      new THREE.Vector3(20, 0, 0), // For Right (X-axis positive)
+      new THREE.Vector3(-20, 0, 0), // For Left (X-axis negative)
+      new THREE.Vector3(0, 20, 0), // For Up (Y-axis positive)
+      new THREE.Vector3(0, -20, 0), // For Down (Y-axis negative)
+      new THREE.Vector3(0, 0, 20), // For Forward (Z-axis positive)
+      new THREE.Vector3(0, 0, -20) // For Backward (Z-axis negative)
     ]
 
-    const nextDirection = directions[Math.floor(Math.random() * directions.length)]
+    const nextDirection = directions[Math.floor(Math.random() * directions.length)] // index of next direction (0-6)
+
     const nextPosition = currentPosition.clone().add(nextDirection)
 
     const curve = new THREE.CatmullRomCurve3([currentPosition, nextPosition])
@@ -46,19 +47,16 @@ function Pipe() {
     <group ref={pipeRef}>
       {pipes.map((pipe, index) => (
         <mesh key={index} geometry={pipe.geometry} castShadow receiveShadow>
-          <meshStandardMaterial
-            color={'#0077ff'} // Change to your desired color
-            roughness={0} // Zero roughness for a reflective finish
-          />
+          <meshStandardMaterial color={color} roughness={0} />
         </mesh>
       ))}
+
       {/* Adding spheres at the joints */}
+
       {pipes.map((pipe, index) => (
         <mesh key={`joint-${index}`} position={pipe.position} castShadow receiveShadow>
           <sphereGeometry args={[1.5, 16, 16]} />
-          <meshStandardMaterial
-            color={'#0077ff'} // Same color for joints
-          />
+          <meshStandardMaterial color={color} />
         </mesh>
       ))}
     </group>
