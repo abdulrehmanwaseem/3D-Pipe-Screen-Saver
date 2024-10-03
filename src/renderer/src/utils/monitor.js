@@ -13,7 +13,7 @@ export const monitorPerformance = () => {
   stats.dom.style.left = '0px'
   stats.dom.style.zIndex = '1000'
 
-  let panel = 0
+  let panel = 2
   const cyclePanels = () => {
     panel = panel === 0 ? 2 : 0
     stats.showPanel(panel)

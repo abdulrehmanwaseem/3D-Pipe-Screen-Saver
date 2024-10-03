@@ -17,9 +17,21 @@ const App = () => {
         <h1 className="absolute text-3xl top-4 z-10 font-bold underline">Pipe Screen Saver</h1>
       </div>
 
-      <Canvas camera={{ position: [0, 0, 50] }}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
+      <Canvas camera={{ position: [0, 0, 50], fov: 75 }} shadows>
+        <ambientLight intensity={0.4} />
+        <directionalLight
+          position={[10, 10, 10]}
+          intensity={1}
+          castShadow
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+          shadow-camera-near={0.5}
+          shadow-camera-far={50}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        />
         <Pipe />
         <OrbitControls />
       </Canvas>
