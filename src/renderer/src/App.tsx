@@ -12,8 +12,13 @@ const App = () => {
     return cleanup
   }, [])
 
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const element = e.currentTarget as HTMLElement
+    element.requestPointerLock()
+  }
+
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-screen h-screen relative" onPointerDown={handlePointerDown}>
       <div className="flex justify-center">
         <h1 className="absolute text-3xl top-4 z-10 font-bold underline">Pipe Screen Saver</h1>
       </div>

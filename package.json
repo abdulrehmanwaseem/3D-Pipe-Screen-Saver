@@ -18,7 +18,7 @@
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux",
-    "build:rename": "npm run build:win && rename dist/\"The Pipe Dream.exe\" \"The Pipe Dream.scr\""
+    "build:scr": "npm run build:win && move dist\\\"3D Pipe Screen Saver.exe\" dist\\\"3D Pipe Screen Saver.scr\""
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
