@@ -19,3 +19,11 @@
     @apply overflow-hidden;
   }
 }
+
+.fade-out {
+  opacity: 1; /* Fully visible */
+}
+
+.transition-opacity {
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+}

@@ -1,11 +1,12 @@
 import './assets/main.css'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
 import Pipe from './components/Pipe'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { monitorPerformance } from './utils/monitor.js'
 
 const App = () => {
+  const [fadeOut, setFadeOut] = useState(false)
+
   useEffect(() => {
     const cleanup = monitorPerformance()
     return cleanup
@@ -17,7 +18,7 @@ const App = () => {
         <h1 className="absolute text-3xl top-4 z-10 font-bold underline">Pipe Screen Saver</h1>
       </div>
 
-      <Canvas camera={{ position: [0, 0, 70], fov: 75 }} shadows>
+      <Canvas camera={{ position: [0, 0, 70], fov: 60 }} shadows>
         <ambientLight intensity={0.4} />
         <directionalLight
           position={[10, 10, 10]}
@@ -32,11 +33,13 @@ const App = () => {
           shadow-camera-top={10}
           shadow-camera-bottom={-10}
         />
-        {/* <Pipe color={'red'} /> */}
-        <Pipe />
-
-        <OrbitControls />
+        <Pipe setFadeOut={setFadeOut} />
       </Canvas>
+
+      {/* Fade overlay div */}
+      <div
+        className={`fixed inset-0 bg-black transition-opacity duration-1000 ${fadeOut ? 'opacity-100' : 'opacity-0'}`}
+      />
 
       <p className="absolute bottom-2 right-2 p-2 text-lg text-center mt-2 font-semibold">
         Author: Abdul Rehman

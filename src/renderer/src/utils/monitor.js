@@ -17,7 +17,6 @@ export const monitorPerformance = () => {
   const cyclePanels = () => {
     panel = panel === 0 ? 2 : 0
     stats.showPanel(panel)
-    setTimeout(cyclePanels, 5000)
   }
   cyclePanels()
 
