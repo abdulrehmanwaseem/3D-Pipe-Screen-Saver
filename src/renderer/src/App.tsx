@@ -41,7 +41,7 @@ const App = () => {
         <Pipe setFadeOut={setFadeOut} />
       </Canvas>
 
-      {/* Fade overlay div */}
+      {/* Fade Out overlay div */}
       <div
         className={`fixed inset-0 bg-black transition-opacity duration-1000 ${fadeOut ? 'opacity-100' : 'opacity-0'}`}
       />
