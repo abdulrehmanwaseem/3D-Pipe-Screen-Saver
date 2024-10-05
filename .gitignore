@@ -3,7 +3,6 @@ dist
 out
 .DS_Store
 *.log*
-installer/3D Pipe Screen Saver Setup 1.0.0.exe
-installer/3D Pipe Screen Saver.scr
-installer/3D Pipe Screen Saver.zip
+installer
+
 
