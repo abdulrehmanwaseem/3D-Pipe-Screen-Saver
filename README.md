@@ -1,4 +1,4 @@
-# The Pipe Dream
+# The Pipe Screen Saver (Windows-95)
 
 ![The Pipe Dream](https://res.cloudinary.com/dgljsrfmk/image/upload/v1728117891/nii0qxevrsmwgrmuczen.png)
 
