@@ -23,7 +23,7 @@ interface ActivePipe {
 
 type DirectionArray = THREE.Vector3[]
 
-function Pipe({ interval = 0.1, numberOfPipes = 7, pipeLimit = 500, setFadeOut }) {
+function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }) {
   const pipeRef = useRef<THREE.Group>(null)
   const [pipes, setPipes] = useState<PipeSegment[]>([])
   const [_, setActivePipes] = useState<ActivePipe[]>(
