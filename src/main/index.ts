@@ -1,9 +1,11 @@
 import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+import icon from '../../resources/icon.png'
 
 function createWindow(fullscreen = true): void {
+  const isDev = process.env.NODE_ENV === 'development' // Check if in development
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -14,7 +16,7 @@ function createWindow(fullscreen = true): void {
     frame: false,
     titleBarStyle: 'hidden',
     resizable: false,
-    fullscreen: fullscreen, // Use the fullscreen parameter here
+    fullscreen: fullscreen,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
@@ -36,6 +38,22 @@ function createWindow(fullscreen = true): void {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+  }
+
+  // Add event listener to close window on mouse move or key press
+  const closeOnInput = () => {
+    if (!isDev) {
+      mainWindow.close()
+    }
+  }
+
+  // Only attach these listeners in fullscreen mode
+  if (fullscreen) {
+    mainWindow.on('blur', closeOnInput)
+    mainWindow.webContents.on('before-input-event', closeOnInput)
+
+    // Listen for mouse movement
+    mainWindow.webContents.on('mousemove', closeOnInput)
   }
 }
 

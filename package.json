@@ -10,15 +10,14 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "start": "electron-vite preview",
-    "dev": "electron-vite dev",
-    "build": "npm run typecheck && electron-vite build",
+    "start": "NODE_ENV=production electron-vite preview",
+    "dev": "NODE_ENV=development electron-vite dev",
+    "build": "npm run typecheck && NODE_ENV=production electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win",
-    "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux",
-    "build:scr": "npm run build:win && move dist\\\"3D Pipe Screen Saver.exe\" dist\\\"3D Pipe Screen Saver.scr\""
+    "build:win": "NODE_ENV=production npm run build && electron-builder --win",
+    "build:mac": "NODE_ENV=production electron-vite build && electron-builder --mac",
+    "build:linux": "NODE_ENV=production electron-vite build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
