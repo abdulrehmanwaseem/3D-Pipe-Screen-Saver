@@ -7,10 +7,28 @@ import { monitorPerformance } from './utils/monitor.js'
 const App = () => {
   const [fadeOut, setFadeOut] = useState(false)
 
-  useEffect(() => {
-    const cleanup = monitorPerformance()
-    return cleanup
-  }, [])
+  if (process.env.NODE_ENV === 'development') {
+    useEffect(() => {
+      const cleanup = monitorPerformance()
+      return cleanup
+    }, [])
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    useEffect(() => {
+      const closeWindowHandler = () => {
+        window.electron.ipcRenderer.send('close-window')
+      }
+
+      document.addEventListener('mousemove', closeWindowHandler)
+      document.addEventListener('keydown', closeWindowHandler)
+
+      return () => {
+        document.removeEventListener('mousemove', closeWindowHandler)
+        document.removeEventListener('keydown', closeWindowHandler)
+      }
+    }, [])
+  }
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const element = e.currentTarget as HTMLElement

@@ -10,14 +10,14 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "start": "NODE_ENV=production electron-vite preview",
-    "dev": "NODE_ENV=development electron-vite dev",
-    "build": "npm run typecheck && NODE_ENV=production electron-vite build",
+    "start": "cross-env VITE_USER_NODE_ENV=production NODE_ENV=production electron-vite preview",
+    "dev": "cross-env VITE_USER_NODE_ENV=development NODE_ENV=development electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "NODE_ENV=production npm run build && electron-builder --win",
-    "build:mac": "NODE_ENV=production electron-vite build && electron-builder --mac",
-    "build:linux": "NODE_ENV=production electron-vite build && electron-builder --linux"
+    "build:win": "npm run build && electron-builder --win",
+    "build:mac": "electron-vite build && electron-builder --mac",
+    "build:linux": "electron-vite build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -37,6 +37,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "electron": "^31.0.2",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.3.0",
