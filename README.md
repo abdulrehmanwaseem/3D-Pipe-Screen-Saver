@@ -1,6 +1,6 @@
-# The Pipe Dream
+# The Pipe Screen Saver (Windows-95)
 
-![The Pipe Dream]()
+![The Pipe Dream](https://res.cloudinary.com/dgljsrfmk/image/upload/v1728117891/nii0qxevrsmwgrmuczen.png)
 
 **Note:** This project is under active development and continuously being improved for better performance and interactivity. New features and bug fixes are added regularly to optimize the 3D experience.
 
