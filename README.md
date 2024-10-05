@@ -2,8 +2,6 @@
 
 ![The Pipe Dream](https://res.cloudinary.com/dgljsrfmk/image/upload/v1728117891/nii0qxevrsmwgrmuczen.png)
 
-**Note:** This project is under active development and continuously being improved for better performance and interactivity. New features and bug fixes are added regularly to optimize the 3D experience.
-
 An Electron.js desktop application with a React and TypeScript setup, built to create a dynamic 3D pipe screensaver. This project is a nod to the nostalgic Windows 95 pipe screensaver but with modern technologies and improved visual effects.
 
 ## Technologies Used
@@ -17,6 +15,7 @@ An Electron.js desktop application with a React and TypeScript setup, built to c
 
 - [Features](#features)
 - [Installation](#installation)
+- [Using as a Screen Saver](#using-as-a-screen-saver)
 - [Development](#development)
 - [Build](#build)
 - [Recommended IDE Setup](#recommended-ide-setup)
@@ -38,20 +37,43 @@ To set up the project locally, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/abdulrehman-code/the-pipe-dream.git
+   git clone https://github.com/abdulrehmanwaseem/3D-Pipe-Screen-Saver
    ```
 
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd the-pipe-dream
-   ```
-
-3. **Install dependencies:**
+2. **Install dependencies:**
 
    ```bash
    npm install
    ```
+
+## Using as a Screen Saver
+
+Once you have built the application, you can use it as your operating system's screen saver by following these steps:
+
+1. **Build the application:**
+
+   After running the build command for your operating system, an installer will be generated.
+
+   - **For Windows:**
+     ```bash
+     npm run build:win
+     ```
+
+2. **Install the Screen Saver:**
+
+   After installation, locate the generated `.exe` file in the output directory.
+
+3. **Change the File Extension:**
+
+   - Rename the `.exe` file to `.scr`. For example, change `3D Pipe Screen Saver.exe` to `3D Pipe Screen Saver.scr`.
+
+4. **Install the Screen Saver:**
+
+   - Right-click on the renamed `.scr` file and select **Install**. This will open the Windows Screen Saver dialog.
+
+5. **Select and Apply:**
+
+   - In the Screen Saver dialog, select the Pipe Screen Saver from the list and click **Apply** to enjoy your nostalgic 3D experience!
 
 ## Development
 
