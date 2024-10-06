@@ -14,22 +14,6 @@ const App = () => {
     }, [])
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    useEffect(() => {
-      const closeWindowHandler = () => {
-        window.electron.ipcRenderer.send('close-window')
-      }
-
-      document.addEventListener('mousemove', closeWindowHandler)
-      document.addEventListener('keydown', closeWindowHandler)
-
-      return () => {
-        document.removeEventListener('mousemove', closeWindowHandler)
-        document.removeEventListener('keydown', closeWindowHandler)
-      }
-    }, [])
-  }
-
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const element = e.currentTarget as HTMLElement
     element.requestPointerLock()

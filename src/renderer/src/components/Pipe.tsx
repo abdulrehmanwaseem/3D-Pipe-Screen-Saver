@@ -12,7 +12,7 @@ interface PipeSegment {
   direction: THREE.Vector3
   position: THREE.Vector3
   color: string
-  opacity: number // Added opacity property
+  opacity: number
 }
 
 interface ActivePipe {
@@ -23,7 +23,7 @@ interface ActivePipe {
 
 type DirectionArray = THREE.Vector3[]
 
-function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }) {
+function Pipe({ interval = 0.01, numberOfPipes = 5, pipeLimit = 500, setFadeOut }) {
   const pipeRef = useRef<THREE.Group>(null)
   const [pipes, setPipes] = useState<PipeSegment[]>([])
   const [_, setActivePipes] = useState<ActivePipe[]>(
@@ -41,7 +41,7 @@ function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }
   const fadeRef = useRef(false)
 
   useFrame((_, delta) => {
-    if (fadeRef.current) return // Stop updating pipes during fade-out
+    if (fadeRef.current) return
 
     timeRef.current += delta
 
@@ -65,12 +65,10 @@ function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }
           const nextDirection = directions[Math.floor(Math.random() * directions.length)]
           const nextPosition = activePipe.currentPosition.clone().add(nextDirection)
 
-          // Check if the next position is inside the camera's view frustum
           if (frustum.containsPoint(nextPosition) && !isColliding(nextPosition)) {
             const curve = new THREE.CatmullRomCurve3([activePipe.currentPosition, nextPosition])
             const newPipe = new THREE.TubeGeometry(curve, 20, 1, 8, true)
 
-            // Add the new pipe segment to the list of pipes
             setPipes((prevPipes) => {
               const newPipes = [
                 ...prevPipes,
@@ -83,7 +81,6 @@ function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }
                 }
               ]
 
-              // Trigger fade-out and stop pipes if limit exceeded
               if (newPipes.length >= pipeLimit) {
                 fadeRef.current = true // Prevent further pipe generation
                 setFadeOut(true) // Trigger fade out effect
@@ -111,10 +108,10 @@ function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }
                       currentDirection: new THREE.Vector3(10, 0, 0),
                       color: generateRandomColor()
                     }))
-                    setActivePipes(newActivePipes) // Update active pipes to new positions
-                    setPipes([]) // Reset pipes
-                  }, 500) // 1 second fade duration
-                }, 500) // 1 second delay before restarting
+                    setActivePipes(newActivePipes)
+                    setPipes([])
+                  }, 500)
+                }, 500)
               }
 
               return newPipes
@@ -143,12 +140,11 @@ function Pipe({ interval = 0.1, numberOfPipes = 5, pipeLimit = 500, setFadeOut }
     return pipes.some((pipe) => {
       // Get the start and end points of the tube geometry
       const path = pipe.geometry.parameters.path as THREE.CatmullRomCurve3
-      const points = path.getPoints(2) // Get the start and end points of the pipe
+      const points = path.getPoints(2)
 
-      const start = points[0] // First point of the pipe
-      const end = points[1] // Second point of the pipe
+      const start = points[0]
+      const end = points[1]
 
-      // Check the distance between the position and the line segment (pipe)
       const distance = getDistanceFromPointToLineSegment(position, start, end)
 
       return distance < collisionThreshold // Return true if within collision threshold
