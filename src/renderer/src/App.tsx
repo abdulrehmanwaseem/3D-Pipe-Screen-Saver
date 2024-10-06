@@ -40,7 +40,7 @@ const App = () => {
           shadow-camera-top={10}
           shadow-camera-bottom={-10}
         />
-        <Pipe setFadeOut={setFadeOut} pipeLimit={600} />
+        <Pipe setFadeOut={setFadeOut} interval={0.06} pipeLimit={800} />
       </Canvas>
 
       {/* Fade Out overlay div */}

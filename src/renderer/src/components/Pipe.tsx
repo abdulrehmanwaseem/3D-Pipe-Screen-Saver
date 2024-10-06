@@ -23,7 +23,7 @@ interface ActivePipe {
 
 type DirectionArray = THREE.Vector3[]
 
-function Pipe({ interval = 0.01, numberOfPipes = 5, pipeLimit = 500, setFadeOut }) {
+function Pipe({ interval = 0.5, numberOfPipes = 5, pipeLimit = 500, setFadeOut }) {
   const pipeRef = useRef<THREE.Group>(null)
   const [pipes, setPipes] = useState<PipeSegment[]>([])
   const [_, setActivePipes] = useState<ActivePipe[]>(
@@ -135,7 +135,7 @@ function Pipe({ interval = 0.01, numberOfPipes = 5, pipeLimit = 500, setFadeOut 
 
   // Function to check collision with existing pipes
   const isColliding = (position: THREE.Vector3) => {
-    const collisionThreshold = 1.5 // Adjust for appropriate collision distance
+    const collisionThreshold = 1.5
 
     return pipes.some((pipe) => {
       // Get the start and end points of the tube geometry
