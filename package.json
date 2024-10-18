@@ -4,6 +4,7 @@
   "description": "A Pipe Screen Saver (Windows 95) with Electron-React-Typescript-Three-Js",
   "main": "./out/main/index.js",
   "author": "Abdul Rehman",
+  "license": "MIT",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
